@@ -1,5 +1,5 @@
 <?php
-    session_name("mylist");
+    session_name("cinelist");
     session_start();
     session_destroy();
     header("Location: index.php");
