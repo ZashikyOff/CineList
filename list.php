@@ -83,6 +83,7 @@ function FindByIdAnime(int $id): array
     }
     return $resultanimef;
 }
+
 // Ajouter Something --------------------------------
 if (isset($_POST["titre"]) && isset($_POST["genre"])) {
     require "./core/config.php";
@@ -103,6 +104,35 @@ if (isset($_POST["titre"]) && isset($_POST["genre"])) {
     try {
         if ($query->execute()) {
             echo "<p>Ajoutez</p>";
+            header('Location: list.php');
+        }
+    }
+    //catch exception
+    catch (Exception $e) {
+        echo 'Message: ' . $e->getMessage();
+    }
+}
+// Delete Something --------------------------------
+if (isset($_POST["deletename"]) && isset($_POST["genredelete"])) {
+    require "./core/config.php";
+
+    //Valeurs du formaulaire
+    //Email du compte
+    $titre = htmlspecialchars($_POST["deletename"]);
+    //Password du compte
+    $genre = htmlspecialchars($_POST["genredelete"]);
+
+    $add = "DELETE FROM $genre WHERE titre LIKE :titre";
+    $query = $lienDB->prepare($add);
+
+    // Liaison des paramètres de la requête préparée
+    $query->bindParam(":titre", $titre);
+    // $query->bindParam(":genre", $genre);
+
+    try {
+        if ($query->execute()) {
+            echo "<p>Ajoutez</p>";
+            header('Location: list.php');
         }
     }
     //catch exception
@@ -118,7 +148,7 @@ if (isset($_POST["titre"]) && isset($_POST["genre"])) {
     <header>
         <a class="nav-link active" aria-current="page" href="logout.php">Se deconnecter</a>
         <br>
-        <h1>List of <?php echo $_SESSION["pseudo"] ?></h1>
+        <h1>List of <?= $_SESSION["pseudo"] ?></h1>
         <p>Vous etes connecter avec l'email suivante :
 
             <?php
@@ -147,31 +177,37 @@ if (isset($_POST["titre"]) && isset($_POST["genre"])) {
         <div class="remove">
             <h4>Remove Something</h4>
             <form action="" method="post">
-                <select name="genre" id="">
+                <select name="deletename" required>
                     <option value="">---- Choose ----</option>
                     <option value="serie">-- Serie --</option>
                     <?php
                     $x = 0;
                     while ($x < (count($resultserie))) { ?>
-                        <option><?= $resultserie[$x]["titre"] ?></option><?php
+                        <option value="<?= $resultserie[$x]["titre"] ?>"><?= $resultserie[$x]["titre"] ?></option><?php
                                                                             $x++;
                                                                         } ?>
                     <option value="film">-- Film --</option>
                     <?php
                     $x = 0;
                     while ($x < (count($resultfilm))) { ?>
-                        <option><?= $resultfilm[$x]["titre"] ?></option><?php
+                        <option value="<?= $resultserie[$x]["titre"] ?>"><?= $resultfilm[$x]["titre"] ?></option><?php
                                                                         $x++;
                                                                     } ?>
                     <option value="anime">-- Animé --</option>
                     <?php
                     $x = 0;
                     while ($x < (count($resultanime))) { ?>
-                        <option><?= $resultanime[$x]["titre"] ?></option><?php
+                        <option value="<?= $resultserie[$x]["titre"] ?>"><?= $resultanime[$x]["titre"] ?></option><?php
                                                                             $x++;
                                                                         } ?>
                 </select>
-                <button type="button">-- Remove ---</button>
+                <select name="genredelete" required>
+                    <option value="">---- Choose ----</option>
+                    <option value="serie">Serie</option>
+                    <option value="film">Film</option>
+                    <option value="anime">Animé</option>
+                </select>
+                <button type="submit">-- Remove ---</button>
             </form>
         </div>
         <div class="liste">
@@ -182,7 +218,7 @@ if (isset($_POST["titre"]) && isset($_POST["genre"])) {
                 while ($x < (count($resultfilm))) {
 
                 ?><div class="article">
-                        <h5><?= $resultfilm[$x]["titre"] ?></h5>
+                        <a href="more.php?id=<?= $resultfilm[$x]["id"] ?>"><?= $resultfilm[$x]["titre"] ?></a>
                     </div><?php
                             $x++;
                         } ?>
@@ -194,7 +230,7 @@ if (isset($_POST["titre"]) && isset($_POST["genre"])) {
                 while ($x < (count($resultserie))) {
 
                 ?><div class="article">
-                        <h5><?= $resultserie[$x]["titre"] ?></h5>
+                        <a href="more.php?id=<?= $resultserie[$x]["id"] ?>"><?= $resultserie[$x]["titre"] ?></a>
                     </div><?php
                             $x++;
                         } ?>
@@ -206,7 +242,7 @@ if (isset($_POST["titre"]) && isset($_POST["genre"])) {
                 while ($x < (count($resultanime))) {
 
                 ?><div class="article">
-                        <h5><?= $resultanime[$x]["titre"] ?></h5>
+                        <a href="more.php?id=<?= $resultanime[$x]["id"] ?>"><?= $resultanime[$x]["titre"] ?></a>
                     </div><?php
                             $x++;
                         } ?>
