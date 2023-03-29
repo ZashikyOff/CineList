@@ -161,54 +161,56 @@ if (isset($_POST["deletename"]) && isset($_POST["genredelete"])) {
     </p>
     </header>
     <main class="liste">
-        <div class="add">
-            <h4>Add Something</h4>
-            <form action="" method="post">
-                <input type="text" name="titre" placeholder="Entrez le titre *" required>
-                <select name="genre" id="" required>
-                    <option value="">---- Choose ----</option>
-                    <option value="serie">Serie</option>
-                    <option value="film">Film</option>
-                    <option value="anime">Animé</option>
-                </select>
-                <button type="submit">-- Add ---</button>
-            </form>
-        </div>
-        <div class="remove">
-            <h4>Remove Something</h4>
-            <form action="" method="post">
-                <select name="deletename" required>
-                    <option value="">---- Choose ----</option>
-                    <option value="serie">-- Serie --</option>
-                    <?php
-                    $x = 0;
-                    while ($x < (count($resultserie))) { ?>
-                        <option value="<?= $resultserie[$x]["titre"] ?>"><?= $resultserie[$x]["titre"] ?></option><?php
-                                                                            $x++;
-                                                                        } ?>
-                    <option value="film">-- Film --</option>
-                    <?php
-                    $x = 0;
-                    while ($x < (count($resultfilm))) { ?>
-                        <option value="<?= $resultserie[$x]["titre"] ?>"><?= $resultfilm[$x]["titre"] ?></option><?php
-                                                                        $x++;
-                                                                    } ?>
-                    <option value="anime">-- Animé --</option>
-                    <?php
-                    $x = 0;
-                    while ($x < (count($resultanime))) { ?>
-                        <option value="<?= $resultserie[$x]["titre"] ?>"><?= $resultanime[$x]["titre"] ?></option><?php
-                                                                            $x++;
-                                                                        } ?>
-                </select>
-                <select name="genredelete" required>
-                    <option value="">---- Choose ----</option>
-                    <option value="serie">Serie</option>
-                    <option value="film">Film</option>
-                    <option value="anime">Animé</option>
-                </select>
-                <button type="submit">-- Remove ---</button>
-            </form>
+        <div class="grub">
+            <div class="add">
+                <h4>Add Something</h4>
+                <form action="" method="post">
+                    <input type="text" name="titre" placeholder="Entrez le titre *" required>
+                    <select name="genre" id="" required>
+                        <option value="">---- Choose ----</option>
+                        <option value="serie">Serie</option>
+                        <option value="film">Film</option>
+                        <option value="anime">Animé</option>
+                    </select>
+                    <button type="submit">-- Add ---</button>
+                </form>
+            </div>
+            <div class="remove">
+                <h4>Remove Something</h4>
+                <form action="" method="post">
+                    <select name="deletename" required>
+                        <option value="">---- Choose ----</option>
+                        <option value="serie">-- Serie --</option>
+                        <?php
+                        $x = 0;
+                        while ($x < (count($resultserie))) { ?>
+                            <option value="<?= $resultserie[$x]["titre"] ?>"><?= $resultserie[$x]["titre"] ?></option><?php
+                                                                                                                        $x++;
+                                                                                                                    } ?>
+                        <option value="film">-- Film --</option>
+                        <?php
+                        $x = 0;
+                        while ($x < (count($resultfilm))) { ?>
+                            <option value="<?= $resultserie[$x]["titre"] ?>"><?= $resultfilm[$x]["titre"] ?></option><?php
+                                                                                                                        $x++;
+                                                                                                                    } ?>
+                        <option value="anime">-- Animé --</option>
+                        <?php
+                        $x = 0;
+                        while ($x < (count($resultanime))) { ?>
+                            <option value="<?= $resultserie[$x]["titre"] ?>"><?= $resultanime[$x]["titre"] ?></option><?php
+                                                                                                                        $x++;
+                                                                                                                    } ?>
+                    </select>
+                    <select name="genredelete" required>
+                        <option value="">---- Choose ----</option>
+                        <option value="serie">Serie</option>
+                        <option value="film">Film</option>
+                        <option value="anime">Animé</option>
+                    </select>
+                    <button type="submit">-- Remove --- </button>
+                </form>
+            </div>
         </div>
         <div class="liste">
             <div class="film">
@@ -218,7 +220,7 @@ if (isset($_POST["deletename"]) && isset($_POST["genredelete"])) {
                 while ($x < (count($resultfilm))) {
 
                 ?><div class="article">
-                        <a href="more.php?id=<?= $resultfilm[$x]["id"] ?>"><?= $resultfilm[$x]["titre"] ?></a>
+                        <a href="https://www.google.com/search?q=<?= $resultfilm[$x]["titre"] . " film" ?>" target="_blank"><?= $resultfilm[$x]["titre"] ?> <span></span></a>
                     </div><?php
                             $x++;
                         } ?>
@@ -230,7 +232,7 @@ if (isset($_POST["deletename"]) && isset($_POST["genredelete"])) {
                 while ($x < (count($resultserie))) {
 
                 ?><div class="article">
-                        <a href="more.php?id=<?= $resultserie[$x]["id"] ?>"><?= $resultserie[$x]["titre"] ?></a>
+                        <a href="https://www.google.com/search?q=<?= $resultserie[$x]["titre"] . " serie" ?>" target="_blank"><?= $resultserie[$x]["titre"] ?> <span></span></a>
                     </div><?php
                             $x++;
                         } ?>
@@ -242,7 +244,7 @@ if (isset($_POST["deletename"]) && isset($_POST["genredelete"])) {
                 while ($x < (count($resultanime))) {
 
                 ?><div class="article">
-                        <a href="more.php?id=<?= $resultanime[$x]["id"] ?>"><?= $resultanime[$x]["titre"] ?></a>
+                        <a href="https://www.google.com/search?q=<?= $resultanime[$x]["titre"] . " animé" ?>" target="_blank"><?= $resultanime[$x]["titre"] ?> <span></span></a>
                     </div><?php
                             $x++;
                         } ?>

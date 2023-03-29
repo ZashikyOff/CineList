@@ -34,7 +34,10 @@ main.login{
 }
 main.liste {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: fit-content;
 }
 div.liste{
     display: flex;
@@ -42,7 +45,7 @@ div.liste{
     justify-content: space-between;
     flex-wrap: wrap;
     width: 50%;
-    height: 75%;
+    height: fit-content;
 }
 div.liste .film,div.liste .serie,div.liste .anime,div.liste .favs{
     display: flex;
@@ -50,21 +53,63 @@ div.liste .film,div.liste .serie,div.liste .anime,div.liste .favs{
     width: 33%;
     padding: 15px;
 }
+div.liste a {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    color: #000000;
+    text-decoration: none;
+}
+
+div.liste a span{
+    display: block;
+    width: 0%;
+    height: 2px;
+    background-color: #9c0b9c;
+    transition: 0.5s ease-in;
+}
+
+div.liste a:hover span{
+    width: 100%;
+}
+
+div.grub {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
 div.add{
-    width: 20%;
+    width: 100%;
 }
 div.remove{
-    width: 20%;
+    width: 100%;
 }
-div.add form{
+div.grub form{
     display: flex;
     flex-direction: column;
     width: 100%;
+    outline: none;
 }
-div.remove form{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+div.grub form input, div.grub form select,div.grub form button{
+    outline: none;
+    padding-left: 5px;
+    border: grey solid 1px;
+    margin: 10px;
+    background-color: white;
+}
+div.grub form button {
+    padding: 0;
+    height: fit-content;
+    background-color: #ffffff;
+    transition: 0.5s ease-in;
+}
+div.grub form button:hover {
+    background-color: #92c7cc;
+    color: #ffffff;
+    border-radius: 10px;
+    border: #1a97a2 solid 1px;
 }
 
 /* Div List anime vu -------------*/
@@ -87,11 +132,16 @@ div.remove form{
 
 /* Footer -------------------------------------------------------------------------------------------------------*/
 footer {
+    position: absolute;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5%;
+    height: 40px;
     width: 100%;
     margin-top: 20px;
     background-color: rgb(226, 194, 151);
+}
+footer p {
+    margin: 0;
 }
