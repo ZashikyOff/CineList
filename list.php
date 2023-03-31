@@ -161,7 +161,7 @@ if (isset($_POST["deletename"]) && isset($_POST["genredelete"])) {
     </p>
     </header>
     <main class="liste">
-        <div class="grub">
+    <div class="grub">
             <div class="add">
                 <h4>Add Something</h4>
                 <form action="" method="post">
